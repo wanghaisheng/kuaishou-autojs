@@ -9,7 +9,7 @@ rem set pc folder
 set PC_FOLDER_PATH=E:\code\open\kuaishou
 
 rem set phone path
-set PHONE_FOLDER_PATH=/storage/emulated/0/脚本/kuaishou/utils
+set PHONE_FOLDER_PATH=/storage/emulated/0/脚本/kuaishou/
 
 rem concect to phone
 %ADB_PATH%\adb devices
@@ -29,7 +29,7 @@ rem create dir in phone
 rem sync 
 %ADB_PATH%\adb push "%PC_FOLDER_PATH%" "%PHONE_FOLDER_PATH%"
 
-rem disconnect
-%ADB_PATH%\adb disconnect
+@REM rem disconnect
+@REM %ADB_PATH%\adb disconnect
 
 endlocal

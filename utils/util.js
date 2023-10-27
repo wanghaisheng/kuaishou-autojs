@@ -156,7 +156,7 @@ const aWhileExit = function () {
 
 var pinLog = {};
 pinLog.w;
-pinLog.init = function () {
+pinLog.init = function (textColor) {
   if (pinLog.w) {
     return;
   }
@@ -173,17 +173,38 @@ pinLog.init = function () {
   }
 
   //显示一个悬浮窗。显示文本  。修改文本内容，id="text"
-  let w = floaty.rawWindow(<text textSize="30sp" w="wrap_content" h="wrap_content" textColor="#C0FF3E" padding="6" id="text"></text>);
 
+  let w = floaty.rawWindow(
+    <text
+      textSize="16sp"
+      w="wrap_content"
+      h="wrap_content"
+      textColor="#C0FF3E"
+      padding="6"
+      id="text"
+    ></text>
+  );
+  if (textColor) {
+    w.text.setTextColor(textColor);
+  }
   ui.run(function () {
-      //初始化悬浮窗，直接扔到屏幕外面
-      w.setPosition(-66666, -66666);
+    //初始化悬浮窗，直接扔到屏幕外面
+    w.setPosition(-66666, -66666);
   });
 
   pinLog.w = w;
 };
 
-pinLog.rePosition=function(w){
+pinLog.hidden = function () {
+  log("悬浮窗隐藏");
+  var w=this.w
+  ui.run(function () {
+    //初始化悬浮窗，直接扔到屏幕外面
+    w.setPosition(-66666, -66666);
+  });
+};
+
+pinLog.rePosition = function (w) {
   var ww = w.getWidth();
   var wh = w.getHeight();
   var dw = device.width;
@@ -193,21 +214,48 @@ pinLog.rePosition=function(w){
   var y = ((dh - wh) * 3) / 4;
   // console.log("固定日志位置：" + x + "---" + y);
   w.setPosition(x, y);
-}
+};
 
-pinLog.log = function (msg) {
+pinLog.log = function (msg, timeout) {
   this.init();
+  this.w.text.setTextColor(colors.parseColor("#092C3A"));
+  this._msg(msg);
+  // if (!!timeout) {
+  //   let timeoutID = setTimeout(function () {
+  //     this.hidden();
+  //   }, timeout * 1000);
+  // }
+};
+pinLog.warn = function (msg, timeout) {
+  this.init();
+  this.w.text.setTextColor(colors.parseColor("#F51AAA"));
+  this._msg(msg);
+//fix 超时这个想法，貌似不行。以后再说吧
+  // if (!!timeout) {
+  //   log("fdfddfd"+timeout);
+  //   setTimeout(() => {
+  //     log("fdsfsdfdffsdfsfdfdfd")
+  //     this.hidden();
+  //   }, timeout * 1000); 
+  // }
+};
+
+//不能暴露此方法 ,私有属性处理比较麻烦，这里简单处理。https://juejin.cn/post/7080131411503972366
+pinLog._msg = function (msg) {
   var w = this.w;
-  
+
   ui.run(function () {
     //隐藏
-    w.setPosition(-66666, -66666);
-    
+    w.setPosition(-6666, -6666);
+
     //写入文字
     w.text.setText(msg);
-    
+  });
+
+  //写入文字之后，再次重绘。不然文字导致的布局不生效
+  ui.run(function () {
     //再次计算位置
-    pinLog.rePosition(w)
+    pinLog.rePosition(w);
     // w.content.attr("alpha", 1); 这个方法好像不管用
   });
 };
@@ -350,11 +398,10 @@ function clickImg(smallImgPath, threshold) {
 // clickImg("1.jpg", 0.9);
 
 function findOneInScreen(eles) {
-
-  log("设备 w %d,h %d",device.width,device.height)
+  log("设备 w %d,h %d", device.width, device.height);
   for (var ele of eles) {
     var r = ele.bounds();
-    log(r)
+    log(r);
     if (
       device.width > r.right &&
       r.right >= 0 &&
@@ -372,12 +419,11 @@ function findOneInScreen(eles) {
 }
 
 function findInScreen(eles) {
-
-  log("设备 w %d,h %d",device.width,device.height)
-  var elesInScreen=[]
+  log("设备 w %d,h %d", device.width, device.height);
+  var elesInScreen = [];
   for (var ele of eles) {
     var r = ele.bounds();
-    log(r)
+    log(r);
     if (
       device.width > r.right &&
       r.right >= 0 &&
@@ -386,14 +432,13 @@ function findInScreen(eles) {
       device.height > r.top &&
       r.top >= 0 &&
       device.height > r.bottom &&
-      r.bottom >= 0 
+      r.bottom >= 0
     ) {
-      elesInScreen.push(ele)
+      elesInScreen.push(ele);
     }
   }
   return elesInScreen;
 }
-
 
 // 模块化 https://www.freecodecamp.org/chinese/news/module-exports-how-to-export-in-node-js-and-javascript/
 module.exports = {

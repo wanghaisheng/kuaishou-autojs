@@ -18,6 +18,8 @@ const { timeoutBreakPoint } = require("./utils/timeoutBreakPoint.js");
 var db = storages.create("kuaishou_gz_list_" + nowDate);
 var ksDb = storages.create("kuaishou_gz" + nowDate);
 
+var statistics=storages.create("rm_statistics")
+
 // storageUserName();
 
 const R = { SUC: 1, FAIL: 2, SLOW: 3 };
@@ -317,10 +319,14 @@ function findClickableParent(ele) {
 main();
 function main() {
   console.log("进入流程");
-  var count = 0;
-  var countSuc = 0;
 
-  // pinLog.log("抢包次数 " + count++ + " 命中次数 " + countSuc);
+  ksDb.put("count", ksDb.get("count", 0) + 1);
+  
+  var count = ksDb.get("count", 0);
+  var countSuc = ksDb.get("countSuc", 0);
+  var countExcetionBack = statistics.get("countExcetionBack", 0);
+
+  pinLog.log("抢 " + count++ + " 次 中 " + countSuc+" 次 异常 "+countExcetionBack+" 次");
   qXJ();
   sleep(1000);
   //分流器
@@ -343,7 +349,7 @@ function main() {
   log("结果为：%d", res);
   switch (res) {
     case R.SUC:
-      countSuc++;
+      ksDb.put("countSuc", ksDb.get("countSuc", 0) + 1);
       suc();
       break;
     case R.FAIL:

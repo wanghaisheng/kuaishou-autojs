@@ -1,7 +1,10 @@
 const { timeoutBreakPoint } = require("./timeoutBreakPoint.js");
 
+var statistics=storages.create("rm_statistics")
+
 events.on("exit", function () {
-  log("exit");
+  log("exit 清空异常统计");
+  statistics.clear()
 });
 
 setInterval(function () {}, 1000); //这个代码的作用？
@@ -47,6 +50,10 @@ const runLoop = function (filePathList, limitTimeSeconds, useBreakPoint, backFun
         if (stop) {
           log("运行超时, 开始 执行销毁命令");
           currentScriptEngine.forceStop();
+
+          //进行异常统计
+          statistics.put("countExcetionBack", statistics.get("countExcetionBack", 0) + 1);
+
           log("运行超时, 结束 执行销毁命令");
 
           log("开始回退...");
