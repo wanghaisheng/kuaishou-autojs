@@ -1,10 +1,15 @@
 const { runLoop } = require("./utils/runnerManage.js");
 const { pinLog, reloadApp, cleanInit } = require("./utils/util.js");
 
-//启动快手
-let appName = "快手";
-reloadApp(appName);
-cleanInit(appName);
+//检测当前是否已经在入口了
+var ele = textMatches("(抢现金|立即抢)").findOne(3000);
+if (!ele) {
+  //启动快手
+  let appName = "快手";
+  reloadApp(appName);
+  cleanInit(appName);
+  mannulInit();
+}
 
 //提示操作
 function mannulInit() {
@@ -13,15 +18,13 @@ function mannulInit() {
     sleep(1000);
     var ele = textMatches("(抢现金|立即抢)").findOne(3000);
     if (ele) {
-      pinLog.log("已经处于初始界面，谢谢！！！")
+      pinLog.log("已经处于初始界面，谢谢！！！");
 
       pinLog.log("");
       break;
     }
   }
 }
-
-mannulInit();
 
 let filePathList = ["xingguang.js"];
 
