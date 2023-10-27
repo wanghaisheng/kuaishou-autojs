@@ -16,4 +16,4 @@ var backFunc = function () {
   return false;
 };
 
-runLoop(filePathList, 60, true, backFunc());
+runLoop(filePathList, 60, true, backFunc);
