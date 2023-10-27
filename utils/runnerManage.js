@@ -7,7 +7,7 @@ events.on("exit", function () {
   statistics.clear()
 });
 
-setInterval(function () {}, 1000); //这个代码的作用？
+setInterval(function () {}, 1000); //这个代码的作用？保持脚本运行 https://www.kancloud.cn/conquerrorfy/daowuya399/2126081
 
 const runLoop = function (filePathList, limitTimeSeconds, useBreakPoint, backFunc) {
     let limitTime = limitTimeSeconds * 1000;

@@ -197,6 +197,17 @@ var guanZhu = function () {
   guanZhuZhuBoQiangHongBao.click();
   // findAndStorageUsername();
   //todo 关注之后获得用户名字
+  
+  // 这个方式不准确，会导致误杀！！！
+  // //等待一会，再次验证，是否关注了。
+  // sleep(1200)
+  // guanZhuZhuBoQiangHongBao = text("关注主播抢红包").findOne(1000);
+
+  // if(guanZhuZhuBoQiangHongBao==null){
+  //   console.log("检测到关注失败")
+  //   aWhileExit()
+  // }
+
   ksDb.put("guanZhuCount", ksDb.get("guanZhuCount", 0) + 1);
 };
 
@@ -325,8 +336,9 @@ function main() {
   var count = ksDb.get("count", 0);
   var countSuc = ksDb.get("countSuc", 0);
   var countExcetionBack = statistics.get("countExcetionBack", 0);
+  var guanZhuCount=ksDb.get("guanZhuCount", 0)
 
-  pinLog.log("抢 " + count++ + " 次 中 " + countSuc+" 次 异常 "+countExcetionBack+" 次");
+  pinLog.log("抢 " + count++ + " 次 中 " + countSuc+" 次 关注 "+guanZhuCount+" 异常 "+countExcetionBack+" 次");
   qXJ();
   sleep(1000);
   //分流器

@@ -218,7 +218,7 @@ pinLog.rePosition = function (w) {
 
 pinLog.log = function (msg, timeout) {
   this.init();
-  this.w.text.setTextColor(colors.parseColor("#092C3A"));
+  this.w.text.setTextColor(colors.parseColor("#FFFFFF"));
   this._msg(msg);
   // if (!!timeout) {
   //   let timeoutID = setTimeout(function () {

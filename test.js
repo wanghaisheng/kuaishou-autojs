@@ -50,10 +50,21 @@ const { timeoutBreakPoint } = require("./utils/timeoutBreakPoint.js");
 //   }
 // }
 
-pinLog.log("中国人名很行fdf")
-sleep(3000)
-pinLog.warn("非常nice")
-pinLog.log("3秒后消失",3)
-sleep(1000)
-// pinLog.hidden()
-sleep(11000000000)
+// pinLog.log("中国人名很行fdf")
+// sleep(3000)
+// pinLog.warn("非常nice")
+// pinLog.log("3秒后消失",3)
+// sleep(1000)
+// // pinLog.hidden()
+// sleep(11000000000)
+
+
+events.observeToast();
+
+events.onToast(function(toast){
+
+log("Toast内容: " + toast.getText() + " 包名: " + toast.getPackageName());
+
+});
+
+// sleep(1000000000)

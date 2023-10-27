@@ -2,6 +2,7 @@ const { runLoop } = require("./utils/runnerManage.js");
 const { pinLog, reloadApp, cleanInit } = require("./utils/util.js");
 
 //检测当前是否已经在入口了
+sleep(4000)//等待用户切app
 var ele = textMatches("(抢现金|立即抢)").findOne(3000);
 if (!ele) {
   //启动快手
