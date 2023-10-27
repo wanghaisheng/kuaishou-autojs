@@ -1,0 +1,10 @@
+{
+    "name": "kuaishou",
+    "main": "xingguang_RM.js",
+    "ignore": [
+        "build"
+    ],
+    "packageName": "auh.kuaishou",
+    "versionName": "1.0.0",
+    "versionCode": 1
+}

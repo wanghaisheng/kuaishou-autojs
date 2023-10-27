@@ -1,0 +1,1 @@
+storages.create("kuaishou").clear();
