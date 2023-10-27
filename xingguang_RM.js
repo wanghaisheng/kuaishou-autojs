@@ -5,11 +5,11 @@ let filePathList = ["xingguang.js"];
 var backFunc = function () {
   var i = 6;
   while (i-- > 0) {
-    var ele = textMatches("(抢现金|立即抢)").findOne(1000);
+    var ele = textMatches("(抢现金|立即抢)").findOne(3000);
     if (ele) {
       return true;
     }
-    sleep(3000);
+    sleep(100);
     back();
     // backBySwipe()
   }
