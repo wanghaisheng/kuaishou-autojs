@@ -1,19 +1,82 @@
 const { runLoop } = require("./utils/runnerManage.js");
-const { pinLog, reloadApp, cleanInit } = require("./utils/util.js");
-
+const { pinLog, reloadApp, cleanInit, getclipX } = require("./utils/util.js");
+const { getClipX, setClipX } = require("./utils/clip.js");
+let appName = "快手";
 //检测当前是否已经在入口了
-sleep(4000)//等待用户切app
-var ele = textMatches("(抢现金|立即抢)").findOne(3000);
-if (!ele) {
-  //启动快手
-  let appName = "快手";
+console.log("检测用户是否在活动入口");
+//中间用户需要操作，等待用户切app，所以时间稍微长一点
+if (
+  currentPackage() != "com.smile.gifmaker" ||
+  textMatches("(抢现金|立即抢)").findOne(5000) == null
+) {
+  console.log("当前不在入口，尝试自动进入");
+  if (!autoIn()) {
+    mannulInit();
+  }
+}
+
+function autoIn() {
+  //未来改成，从服务拉取
+  var kuaishouShare = getClipX();
+  //清空剪切板
+  setClipX("好的");
+
+  // var kuaishouShare =
+  //   "https://v.kuaishou.com/bvoyJh 才艺💃幺妹妹的直播很精彩，快来围观！点击链接，打开【快手】直接观看！";
+  console.log(kuaishouShare);
+  if (!kuaishouShare || kuaishouShare.indexOf("v.kuaishou.com") < 0) {
+    //剪切板不存在分享,手动操作https://v.kuaishou.com/ajbtws 潮社男孩1.0练气版的直播很精彩，快来围观！点击链接，打开【快手】直接观看！
+    console.log("自动进入失败。不存在剪切板分享入口");
+    return false;
+  }
+
+  console.log("开始自动进入");
+
+  //打开app，找到弹框，点击进入
   reloadApp(appName);
   cleanInit(appName);
-  mannulInit();
+
+  console.log("等待进入快手");
+  while (currentPackage() != "com.smile.gifmaker") {
+    sleep(1000);
+  }
+
+  console.log("切换到非快手界面");
+  //切换快手到其他app
+  app.openAppSetting(appName);
+  sleep(1000);
+  console.log("粘贴剪切板");
+  setClipX(kuaishouShare);
+  sleep(1000);
+
+  console.log("切回快手");
+  app.launch(appName);
+
+  // 找到弹框
+  console.log("等待弹框");
+
+  var ele = text("直播").id("action").clickable().findOne(6000);
+
+  if (!ele) {
+    console.log("未自动弹出，自动进入失败");
+    return false;
+  }
+
+  if (ele.text().indexOf("暂未直播") > 0) {
+    //todo 重新切换，重新复制粘贴板，切换应用
+  }
+
+  ele.click();
+
+  console.log("查找星光活动"); //todo
+
+  console.log("自动进入失败");
+  return false;
 }
 
 //提示操作
 function mannulInit() {
+  console.log("请手动找到，星光红包初始界面!!");
   pinLog.warn("请手动找到，星光红包初始界面!!");
   while (1) {
     sleep(1000);
@@ -44,6 +107,7 @@ var backFunc = function () {
   pinLog.log("错误【回退失败】请用户干预！！");
   //手动干预
   mannulInit();
+  //todo 重启进入
   return false;
 };
 

@@ -11,6 +11,7 @@ const {
   nowDate,
   findOneInScreen,
   findInScreen,
+  getclipX,
 } = require("./utils/util");
 
 const { timeoutBreakPoint } = require("./utils/timeoutBreakPoint.js");
@@ -58,13 +59,13 @@ const { timeoutBreakPoint } = require("./utils/timeoutBreakPoint.js");
 // // pinLog.hidden()
 // sleep(11000000000)
 
+// events.observeToast();
 
-events.observeToast();
+// events.onToast(function(toast){
 
-events.onToast(function(toast){
+// log("Toast内容: " + toast.getText() + " 包名: " + toast.getPackageName());
 
-log("Toast内容: " + toast.getText() + " 包名: " + toast.getPackageName());
-
-});
+// });
 
 // sleep(1000000000)
+

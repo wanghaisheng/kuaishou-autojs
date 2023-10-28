@@ -10,11 +10,15 @@ const {cleanInit,mutilClick,reloadApp,printEles}= require("util.js"); //!!!!! �
 
 // 寻找页面中的滚动控件
 // log(id('view_pager').scrollable().find())
-log(scrollable().find())
+// log(scrollable().find())
 // scrollForward()
-scrollDown(1)
+// scrollDown(1)
 // id('recycler_view').findOne().scrollForward()
 
 // log(id("acpb_share_view").find())
 // className('androidx.viewpager.widget.ViewPage').findOne().scrollDown()
 // id('lrvhRecyclerView').findOne().scrollForward()
+
+// textMatches("作品").findOne()
+
+log(currentPackage())//com.smile.gifmaker

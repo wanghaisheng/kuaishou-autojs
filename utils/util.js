@@ -197,7 +197,7 @@ pinLog.init = function (textColor) {
 
 pinLog.hidden = function () {
   log("悬浮窗隐藏");
-  var w=this.w
+  var w = this.w;
   ui.run(function () {
     //初始化悬浮窗，直接扔到屏幕外面
     w.setPosition(-66666, -66666);
@@ -230,13 +230,13 @@ pinLog.warn = function (msg, timeout) {
   this.init();
   this.w.text.setTextColor(colors.parseColor("#F51AAA"));
   this._msg(msg);
-//fix 超时这个想法，貌似不行。以后再说吧
+  //fix 超时这个想法，貌似不行。以后再说吧
   // if (!!timeout) {
   //   log("fdfddfd"+timeout);
   //   setTimeout(() => {
   //     log("fdsfsdfdffsdfsfdfdfd")
   //     this.hidden();
-  //   }, timeout * 1000); 
+  //   }, timeout * 1000);
   // }
 };
 
