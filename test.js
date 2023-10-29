@@ -25,8 +25,10 @@ const { timeoutBreakPoint } = require("./utils/timeoutBreakPoint.js");
 // //com.yxcorp.gifshow.HomeActivity
 
 // log(currentPackage())
-
+var ele = textMatches(".*直播.*").clickable().find();
+log(ele)
 // //com.smile.gifmaker
+// 进入直播间  暂未直播，去个人主页
 
 // pinLog.log("抢包次数 " + 0 + " 命中次数 ");
 

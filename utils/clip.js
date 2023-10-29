@@ -1,6 +1,6 @@
 var clipStorage = storages.create("clip");
 
- var getClipX=function() {
+var getClipX = function () {
   var th1 = threads.start(function () {
     var win = floaty.window(
       <vertical>
@@ -17,7 +17,7 @@ var clipStorage = storages.create("clip");
     var th = threads.start(function () {
       et = className("EditText").findOne();
       et.paste();
-      log("获取剪切板内容为："+win.输入.text())
+      log("获取剪切板内容为：" + win.输入.text());
       clipStorage.put("1", win.输入.text());
       ui.run(() => {
         win.disableFocus();
@@ -29,15 +29,14 @@ var clipStorage = storages.create("clip");
   //等待获取内容
   th1.join();
   return clipStorage.get("1");
-}
+};
 
-var setClipX=function(text){
-    setClip(text)
-}
+var setClipX = function (text) {
+  setClip(text);
+};
 
-// //测试    
-setClip("xxxxxxx43x");  // 设置貌似是比较稳定的。
-log(getClipX());  //设置之后的第一次，稳定获取.。之后再操作就不是很稳定。
+// // //测试
+// setClip("xxxxxxx43x"); // 设置貌似是比较稳定的。
+// log(getClipX()); //设置之后的第一次，稳定获取.。之后再操作就不是很稳定。
 
-
-module.exports={getClipX,setClipX}
+module.exports = { getClipX, setClipX };

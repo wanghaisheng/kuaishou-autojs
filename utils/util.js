@@ -352,6 +352,25 @@ function clickUnclickbleCenter(ele, x, y) {
   click(x, y);
 }
 
+function pressUnclickbleCenter(ele, x, y) {
+  var b = ele.bounds();
+  log(b);
+
+  if (!x) {
+    x = 0;
+    y = 0;
+  }
+
+  if (!y) {
+    y = x;
+  }
+
+  var x = parseInt((b.right - b.left) / 2) + b.left + random(-x, x);
+  var y = parseInt((b.bottom - b.top) / 2) + b.top + random(-y, y);
+  log("模拟点击 %d %d", x, y);
+  press(x, y);
+}
+
 const nowDate = function () {
   // 获取当前日期
   var date = new Date();
@@ -463,4 +482,6 @@ module.exports = {
   keepAlive,
   findOneInScreen,
   findInScreen,
+  pressUnclickbleCenter,
+  stopOther,
 };
