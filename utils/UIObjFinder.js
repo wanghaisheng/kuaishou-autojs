@@ -11,7 +11,7 @@ const {cleanInit,mutilClick,reloadApp,printEles}= require("util.js"); //!!!!! �
 // 寻找页面中的滚动控件
 // log(id('view_pager').scrollable().find())
 // log(scrollable().find())
-// scrollForward()
+scrollForward()
 // scrollDown(1)
 // id('recycler_view').findOne().scrollForward()
 

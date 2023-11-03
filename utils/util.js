@@ -401,7 +401,9 @@ const nowDate = function () {
 
 function clickImg(smallImgPath, threshold) {
   var smallImg = images.read(smallImgPath); //读取本地的领取图片
+  console.log(smallImg)
   var img = captureScreen();
+  console.log(img)
   var result = findImage(img, smallImg, {
     threshold: threshold,
   }); //找到图会返回坐标 找不到返回null
@@ -431,9 +433,11 @@ function findOneInScreen(eles) {
       device.height > r.bottom &&
       r.bottom >= 0
     ) {
+      log("屏幕中元素：",r)
       return ele;
     }
   }
+  log("未在屏幕中找到")
   return null;
 }
 

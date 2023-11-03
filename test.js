@@ -71,3 +71,16 @@ log(ele)
 
 // sleep(1000000000)
 
+// const { clickImg,keepAlive } = require("./utils/util");
+
+// keepAlive()
+
+
+// t=0.1
+// requestScreenCapture();
+
+// while(t<=1){
+//     clickImg("./imgs/jx.jpg",t);
+//     t=t+0.1
+// }
+

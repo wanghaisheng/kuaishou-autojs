@@ -26,3 +26,15 @@ for d in adb.device_list():
         phonePath=f.replace("E:\code\open\kuaishou-autojs","/storage/emulated/0/脚本/ks").replace("\\","/")
         print(localPath+"   >>>   "+phonePath)
         d.sync.push(localPath,phonePath)
+
+    for f in glob.glob('E:\code\open\kuaishou-autojs\**\*.png',recursive=True):
+        localPath=f
+        phonePath=f.replace("E:\code\open\kuaishou-autojs","/storage/emulated/0/脚本/ks").replace("\\","/")
+        print(localPath+"   >>>   "+phonePath)
+        d.sync.push(localPath,phonePath)
+
+    for f in glob.glob('E:\code\open\kuaishou-autojs\**\*.jpg',recursive=True):
+        localPath=f
+        phonePath=f.replace("E:\code\open\kuaishou-autojs","/storage/emulated/0/脚本/ks").replace("\\","/")
+        print(localPath+"   >>>   "+phonePath)
+        d.sync.push(localPath,phonePath)
