@@ -6,10 +6,19 @@
 // 首页-关注-找到直播-开始滑动
 
 const { cmd } = require("./utils/wedis");
+const { loopDoUtilTime, nextVedio, randomOperate } = require("./ksUtil");
 
-function intoList() {}
+
+function intoList() {
+
+}
+
 
 function reward() {}
+
+function existPackage(){
+
+}
 
 function getRewardTime() {}
 

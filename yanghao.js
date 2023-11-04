@@ -4,6 +4,8 @@ const {
   findOneInScreen,
 } = require("./utils/util");
 
+const { loopDoUtilTime, nextVedio, randomOperate } = require("./ksUtil");
+
 main();
 
 // 养号的逻辑。从一个页面中不断的刷，并且进行，点赞/评论/什么都不干，操作。中间要有一定时间的停留。
@@ -17,7 +19,8 @@ function main() {
       log("...");
       nextVedio();
       try {
-        randomOperate()();
+        // 点赞，评论，或者什么也不干
+        randomOperate([() => {}, dianZan, pingLun])();
       } catch (error) {
         log("eeee");
       }
@@ -27,29 +30,9 @@ function main() {
   );
 }
 
-function randomOperate() {
-  // 点赞，评论，或者什么也不干
-  var operateArr = [() => {}, dianZan, pingLun];
-  return operateArr[random(0, 2)];
-}
-
 // 判断当前是否在工作页面；否则，自动进入，否则手动介入。
 function waitIntoTab() {
   clickImg("./imgs/jx.jpg");
-}
-
-function loopDoUtilTime(func, seconds, randomSec) {
-  var untilTime = seconds * 1000 + new Date().getTime();
-  var randomWait = randomSec * 1000;
-  while (new Date().getTime() <= untilTime) {
-    func();
-    sleep(random(100, randomWait));
-  }
-}
-
-function nextVedio() {
-  scrollForward();
-  sleep(500, 1000); //时间可能要长一点
 }
 
 // nextVedio()
